@@ -4,6 +4,8 @@ const userController = require('../controllers/userController');
 const applicationController = require('../controllers/applicationController');
 const reportController = require('../controllers/reportController');
 const documentController = require('../controllers/documentController');
+const clientController = require('../controllers/clientController');
+const accountController = require('../controllers/accountController');
 const rbacMiddleware = require('../middleware/rbacMiddleware');
 const upload = require('../middleware/upload');
 
@@ -53,6 +55,15 @@ router.get('/api/reports/team', rbacMiddleware(['Admin', 'Manager']), reportCont
 router.get('/api/reports/application-type', rbacMiddleware(['Admin', 'Manager']), reportController.reportApplicationType);
 router.get('/api/reports/successful-applications', rbacMiddleware(['Admin', 'Manager']), reportController.reportSuccessfulApplications);
 
+router.post('/api/clients', clientController.createClient);  
+router.get('/api/clients', clientController.getClients);  
+router.get('/api/clients/:client_id', clientController.getClientById);  
+router.put('/api/clients/:client_id', clientController.updateClient);  
+router.delete('/api/clients/:client_id', clientController.deleteClient);
 
+router.post('/account/register', accountController.register);  
+router.post('/account/login', accountController.login);  
+router.post('/account/forgot-password', accountController.forgotPassword);  
+router.delete('/account/:client_id', accountController.deleteAccount); 
 
 module.exports = router;  
