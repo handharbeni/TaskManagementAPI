@@ -510,7 +510,7 @@ const login = async (req, res) => {
 
         if (user && await bcrypt.compare(password, user.password_hash)) {
             const token = jwt.sign(
-                { user_id: user.client_id, role: user.role },
+                { user_id: user.user_id, role: user.role, type: 'internal' },
                 process.env.JWT_SECRET,
                 { expiresIn: '3d' }
             );

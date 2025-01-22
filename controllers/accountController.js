@@ -36,7 +36,7 @@ const clientController = {
 
             if (client && await bcrypt.compare(password, client.password_hash)) {
                 // Generate a token (optional)  
-                const token = jwt.sign({ client_id: client.client_id }, process.env.JWT_SECRET, { expiresIn: '1d' });
+                const token = jwt.sign({ client_id: client.client_id, role: 'client', type: 'external' }, process.env.JWT_SECRET, { expiresIn: '3d' });
                 res.status(200).json({ message: 'Login successful', client_id: client.client_id, token });
             } else {
                 res.status(401).json({ error: 'Invalid email or password' });

@@ -14,13 +14,12 @@ const rbacMiddleware = (requiredRoles) => {
                 return res.status(403).json({ error: 'Invalid token.' });
             }
 
-            // Check if the user's role is in the required roles  
             if (!requiredRoles.includes(user.role)) {
                 return res.status(403).json({ error: 'Access denied. You do not have the required role.' });
             }
 
-            req.user = user; // Attach user info to request
-            req.role = decoded.role; // Save role to request for use in other routes  
+            req.user = user;
+            req.role = decoded.role;
 
             next();
         });

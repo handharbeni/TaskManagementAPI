@@ -41,13 +41,13 @@ router.post('/tasks', rbacMiddleware(['Admin', 'Manager']), applicationControlle
 router.get('/applications/:application_id/tasks', rbacMiddleware(['Admin', 'Manager', 'Member']), applicationController.getTasks);
 router.put('/tasks/:task_id', rbacMiddleware(['Admin', 'Manager']), applicationController.updateTask);
 router.delete('/tasks/:task_id', rbacMiddleware(['Admin']), applicationController.deleteTask);
-router.get('/tasks/:task_id/documents', applicationController.getTaskDocuments);
+router.get('/tasks/:task_id/documents', rbacMiddleware(['Admin', 'Manager', 'Member']), applicationController.getTaskDocuments);
 
-router.post('/documents/upload', upload.single('document'), documentController.uploadDocument);
+router.post('/documents/upload', rbacMiddleware(['Admin', 'Manager', 'Member']), upload.single('document'), documentController.uploadDocument);
   
-router.put('/tasks/:task_id/checklist', applicationController.updateChecklistItem);
-router.get('/tasks/:task_id/checklist', applicationController.getChecklistItems);
-router.get('/tasks/:task_id/documents', documentController.getTaskDocuments);
+router.put('/tasks/:task_id/checklist', rbacMiddleware(['Admin', 'Manager', 'Member']), applicationController.updateChecklistItem);
+router.get('/tasks/:task_id/checklist', rbacMiddleware(['Admin', 'Manager', 'Member']), applicationController.getChecklistItems);
+router.get('/tasks/:task_id/documents', rbacMiddleware(['Admin', 'Manager', 'Member']), documentController.getTaskDocuments);
 
 // Report routes  
 router.get('/reports/member', rbacMiddleware(['Admin', 'Manager']), reportController.reportMember);
@@ -55,15 +55,15 @@ router.get('/reports/team', rbacMiddleware(['Admin', 'Manager']), reportControll
 router.get('/reports/application-type', rbacMiddleware(['Admin', 'Manager']), reportController.reportApplicationType);
 router.get('/reports/successful-applications', rbacMiddleware(['Admin', 'Manager']), reportController.reportSuccessfulApplications);
 
-router.post('/clients', clientController.createClient);  
-router.get('/clients', clientController.getClients);  
-router.get('/clients/:client_id', clientController.getClientById);  
-router.put('/clients/:client_id', clientController.updateClient);  
-router.delete('/clients/:client_id', clientController.deleteClient);
+router.post('/clients', rbacMiddleware(['SuperAdmin', 'Admin', 'Manager', 'Member']), clientController.createClient);
+router.get('/clients', rbacMiddleware(['SuperAdmin', 'Admin', 'Manager', 'Member']), clientController.getClients);
+router.get('/clients/:client_id', rbacMiddleware(['SuperAdmin', 'Admin', 'Manager', 'Member']), clientController.getClientById);
+router.put('/clients/:client_id', rbacMiddleware(['SuperAdmin', 'Admin', 'Manager', 'Member']), clientController.updateClient);
+router.delete('/clients/:client_id', rbacMiddleware(['SuperAdmin', 'Admin', 'Manager', 'Member']), clientController.deleteClient);
 
 router.post('/account/register', accountController.register);  
 router.post('/account/login', accountController.login);  
 router.post('/account/forgot-password', accountController.forgotPassword);  
-router.delete('/account/:client_id', accountController.deleteAccount); 
+router.delete('/account/:client_id', rbacMiddleware(['Client']), accountController.deleteAccount); 
 
 module.exports = router;  
