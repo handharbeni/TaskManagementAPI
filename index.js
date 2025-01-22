@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const swaggerJsDoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
-const userRoutes = require('./routes/routes');
+const routes = require('./routes/routes');
 const cronJob = require('./cron');
 
 const swaggerOptions = {
@@ -50,7 +50,7 @@ app.use(
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
-app.use('/api', userRoutes); 
+app.use('/api', routes); 
 
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));

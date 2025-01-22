@@ -58,26 +58,26 @@ const jwt = require('jsonwebtoken');
  *                   type: string  
  *                   description: Error message indicating the failure reason.  
  *                   example: "Failed to register user"  
- */  
-const registerUser = async (req, res) => {  
-    const { username, email, password, role } = req.body;  
-  
-    try {  
-        const hashedPassword = await bcrypt.hash(password, 10);  
-        const [user_id] = await knex('users').insert({  
-            username,  
-            email,  
-            password_hash: hashedPassword,  
-            role,  
-            created_at: new Date(),  
-            updated_at: new Date(),  
-        }).returning('user_id');  
-  
-        res.status(201).json({ user_id });  
-    } catch (error) {  
-        res.status(500).json({ error: 'Failed to register user' });  
-    }  
-};  
+ */
+const registerUser = async (req, res) => {
+    const { username, email, password, role } = req.body;
+
+    try {
+        const hashedPassword = await bcrypt.hash(password, 10);
+        const [user_id] = await knex('users').insert({
+            username,
+            email,
+            password_hash: hashedPassword,
+            role,
+            created_at: new Date(),
+            updated_at: new Date(),
+        }).returning('user_id');
+
+        res.status(201).json({ user_id });
+    } catch (error) {
+        res.status(500).json({ error: 'Failed to register user' });
+    }
+};
 
 
 // Function to create a member  
@@ -132,26 +132,26 @@ const registerUser = async (req, res) => {
  *                   type: string  
  *                   description: Error message indicating the failure reason.  
  *                   example: "Failed to create member"  
- */  
-const createMember = async (req, res) => {  
-    const { username, email, password } = req.body;  
-  
-    try {  
-        const hashedPassword = await bcrypt.hash(password, 10);  
-        const [user_id] = await knex('users').insert({  
-            username,  
-            email,  
-            password_hash: hashedPassword,  
-            role: 'Member',  
-            created_at: new Date(),  
-            updated_at: new Date(),  
-        }).returning('user_id');  
-  
-        res.status(201).json({ user_id });  
-    } catch (error) {  
-        res.status(500).json({ error: 'Failed to create member' });  
-    }  
-};  
+ */
+const createMember = async (req, res) => {
+    const { username, email, password } = req.body;
+
+    try {
+        const hashedPassword = await bcrypt.hash(password, 10);
+        const [user_id] = await knex('users').insert({
+            username,
+            email,
+            password_hash: hashedPassword,
+            role: 'Member',
+            created_at: new Date(),
+            updated_at: new Date(),
+        }).returning('user_id');
+
+        res.status(201).json({ user_id });
+    } catch (error) {
+        res.status(500).json({ error: 'Failed to create member' });
+    }
+};
 
 
 // Function to create an admin  
@@ -206,26 +206,26 @@ const createMember = async (req, res) => {
  *                   type: string  
  *                   description: Error message indicating the failure reason.  
  *                   example: "Failed to create admin"  
- */  
-const createAdmin = async (req, res) => {  
-    const { username, email, password } = req.body;  
-  
-    try {  
-        const hashedPassword = await bcrypt.hash(password, 10);  
-        const [user_id] = await knex('users').insert({  
-            username,  
-            email,  
-            password_hash: hashedPassword,  
-            role: 'Admin',  
-            created_at: new Date(),  
-            updated_at: new Date(),  
-        }).returning('user_id');  
-  
-        res.status(201).json({ user_id });  
-    } catch (error) {  
-        res.status(500).json({ error: 'Failed to create admin' });  
-    }  
-};  
+ */
+const createAdmin = async (req, res) => {
+    const { username, email, password } = req.body;
+
+    try {
+        const hashedPassword = await bcrypt.hash(password, 10);
+        const [user_id] = await knex('users').insert({
+            username,
+            email,
+            password_hash: hashedPassword,
+            role: 'Admin',
+            created_at: new Date(),
+            updated_at: new Date(),
+        }).returning('user_id');
+
+        res.status(201).json({ user_id });
+    } catch (error) {
+        res.status(500).json({ error: 'Failed to create admin' });
+    }
+};
 
 
 // Function to create a manager  
@@ -280,26 +280,26 @@ const createAdmin = async (req, res) => {
  *                   type: string  
  *                   description: Error message indicating the failure reason.  
  *                   example: "Failed to create manager"  
- */  
-const createManager = async (req, res) => {  
-    const { username, email, password } = req.body;  
-  
-    try {  
-        const hashedPassword = await bcrypt.hash(password, 10);  
-        const [user_id] = await knex('users').insert({  
-            username,  
-            email,  
-            password_hash: hashedPassword,  
-            role: 'Manager',  
-            created_at: new Date(),  
-            updated_at: new Date(),  
-        }).returning('user_id');  
-  
-        res.status(201).json({ user_id });  
-    } catch (error) {  
-        res.status(500).json({ error: 'Failed to create manager' });  
-    }  
-};  
+ */
+const createManager = async (req, res) => {
+    const { username, email, password } = req.body;
+
+    try {
+        const hashedPassword = await bcrypt.hash(password, 10);
+        const [user_id] = await knex('users').insert({
+            username,
+            email,
+            password_hash: hashedPassword,
+            role: 'Manager',
+            created_at: new Date(),
+            updated_at: new Date(),
+        }).returning('user_id');
+
+        res.status(201).json({ user_id });
+    } catch (error) {
+        res.status(500).json({ error: 'Failed to create manager' });
+    }
+};
 
 
 // Function to create a notaris  
@@ -354,26 +354,26 @@ const createManager = async (req, res) => {
  *                   type: string  
  *                   description: Error message indicating the failure reason.  
  *                   example: "Failed to create notaris"  
- */  
-const createNotaris = async (req, res) => {  
-    const { username, email, password } = req.body;  
-  
-    try {  
-        const hashedPassword = await bcrypt.hash(password, 10);  
-        const [user_id] = await knex('users').insert({  
-            username,  
-            email,  
-            password_hash: hashedPassword,  
-            role: 'Notaris',  
-            created_at: new Date(),  
-            updated_at: new Date(),  
-        }).returning('user_id');  
-  
-        res.status(201).json({ user_id });  
-    } catch (error) {  
-        res.status(500).json({ error: 'Failed to create notaris' });  
-    }  
-};  
+ */
+const createNotaris = async (req, res) => {
+    const { username, email, password } = req.body;
+
+    try {
+        const hashedPassword = await bcrypt.hash(password, 10);
+        const [user_id] = await knex('users').insert({
+            username,
+            email,
+            password_hash: hashedPassword,
+            role: 'Notaris',
+            created_at: new Date(),
+            updated_at: new Date(),
+        }).returning('user_id');
+
+        res.status(201).json({ user_id });
+    } catch (error) {
+        res.status(500).json({ error: 'Failed to create notaris' });
+    }
+};
 
 
 // Function to reset the password of the user  
@@ -423,22 +423,22 @@ const createNotaris = async (req, res) => {
  *                   type: string  
  *                   description: Error message indicating the failure reason.  
  *                   example: "Failed to reset password"  
- */  
-const resetPassword = async (req, res) => {  
-    const { user_id, newPassword } = req.body;  
-  
-    try {  
-        const hashedPassword = await bcrypt.hash(newPassword, 10);  
-        await knex('users').where({ user_id }).update({  
-            password_hash: hashedPassword,  
-            updated_at: new Date(),  
-        });  
-  
-        res.status(200).json({ message: 'Password reset successfully' });  
-    } catch (error) {  
-        res.status(500).json({ error: 'Failed to reset password' });  
-    }  
-};  
+ */
+const resetPassword = async (req, res) => {
+    const { user_id, newPassword } = req.body;
+
+    try {
+        const hashedPassword = await bcrypt.hash(newPassword, 10);
+        await knex('users').where({ user_id }).update({
+            password_hash: hashedPassword,
+            updated_at: new Date(),
+        });
+
+        res.status(200).json({ message: 'Password reset successfully' });
+    } catch (error) {
+        res.status(500).json({ error: 'Failed to reset password' });
+    }
+};
 
 /**  
  * @swagger  
@@ -475,10 +475,10 @@ const resetPassword = async (req, res) => {
  *                   type: string  
  *                   description: Confirmation message indicating successful login.  
  *                   example: "Login successful"  
- *                 user_id:  
- *                   type: integer  
- *                   description: The ID of the logged-in user.  
- *                   example: 1  
+ *                 token:  
+ *                   type: string  
+ *                   description: JWT token for the authenticated user.  
+ *                   example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."  
  *       401:  
  *         description: Invalid email or password  
  *         content:  
@@ -502,24 +502,26 @@ const resetPassword = async (req, res) => {
  *                   description: Error message indicating the failure reason.  
  *                   example: "Failed to login"  
  */
-const login = async (req, res) => {  
-    const { email, password } = req.body;  
-  
-    try {  
-        // Find the user by email  
-        const user = await knex('users').where({ email }).first();  
-  
-        // Check if user exists and password matches  
-        if (user && await bcrypt.compare(password, user.password_hash)) {  
-            // Here you would typically generate a token (e.g., JWT) for the user  
-            res.status(200).json({ message: 'Login successful', user_id: user.user_id });  
-        } else {  
-            res.status(401).json({ error: 'Invalid email or password' });  
-        }  
-    } catch (error) {  
-        res.status(500).json({ error: 'Failed to login' });  
-    }  
-}; 
+const login = async (req, res) => {
+    const { email, password } = req.body;
+
+    try {
+        const user = await knex('users').where({ email }).first();
+
+        if (user && await bcrypt.compare(password, user.password_hash)) {
+            const token = jwt.sign(
+                { user_id: user.client_id, role: user.role },
+                process.env.JWT_SECRET,
+                { expiresIn: '3d' }
+            );
+            res.status(200).json({ message: 'Login successful', token });
+        } else {
+            res.status(401).json({ error: 'Invalid email or password' });
+        }
+    } catch (error) {
+        res.status(500).json({ error: 'Failed to login' });
+    }
+};
 
 // Export the user functions  
 module.exports = {

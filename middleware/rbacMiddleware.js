@@ -19,7 +19,9 @@ const rbacMiddleware = (requiredRoles) => {
                 return res.status(403).json({ error: 'Access denied. You do not have the required role.' });
             }
 
-            req.user = user; // Attach user info to request  
+            req.user = user; // Attach user info to request
+            req.role = decoded.role; // Save role to request for use in other routes  
+
             next();
         });
     };

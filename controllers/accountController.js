@@ -1,3 +1,4 @@
+require('dotenv').config();
 const bcrypt = require('bcrypt');
 const knex = require('../db')
 const jwt = require('jsonwebtoken');
@@ -35,7 +36,7 @@ const clientController = {
 
             if (client && await bcrypt.compare(password, client.password_hash)) {
                 // Generate a token (optional)  
-                const token = jwt.sign({ client_id: client.client_id }, 'your_jwt_secret', { expiresIn: '1h' });
+                const token = jwt.sign({ client_id: client.client_id }, process.env.JWT_SECRET, { expiresIn: '1d' });
                 res.status(200).json({ message: 'Login successful', client_id: client.client_id, token });
             } else {
                 res.status(401).json({ error: 'Invalid email or password' });
@@ -83,7 +84,7 @@ const clientController = {
 
 /**  
  * @swagger  
- * /account/register:  
+ * /api/account/register:  
  *   post:  
  *     summary: Register a new client  
  *     description: This endpoint allows for the registration of a new client by providing their details.  
@@ -144,7 +145,7 @@ const clientController = {
   
 /**  
  * @swagger  
- * /account/login:  
+ * /api/account/login:  
  *   post:  
  *     summary: User login  
  *     description: This endpoint allows a user to log in by providing their email and password.  
@@ -207,7 +208,7 @@ const clientController = {
   
 /**  
  * @swagger  
- * /account/forgot-password:  
+ * /api/account/forgot-password:  
  *   post:  
  *     summary: Forgot password  
  *     description: This endpoint allows a user to request a password reset by providing their email.  
@@ -263,7 +264,7 @@ const clientController = {
   
 /**  
  * @swagger  
- * /account/{client_id}:  
+ * /api/account/{client_id}:  
  *   delete:  
  *     summary: Delete client account  
  *     description: This endpoint allows a user to delete their account by providing their client ID.  
