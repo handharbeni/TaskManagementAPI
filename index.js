@@ -44,7 +44,7 @@ const app = express();
 
 app.use(
     cors({
-        origin: "http://localhost:3000", // Replace with your frontend URL
+        origin: "http://localhost:3200",
     })
 );
 app.use(bodyParser.json());
